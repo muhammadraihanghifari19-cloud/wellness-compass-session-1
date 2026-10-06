@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wellness Compass - understand your lifestyle and get personalized habit recommendations." />
+  <title>Wellness Compass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <!-- ====================== HEADER ====================== -->
+  <header class="site-header">
+    <a class="brand" href="#" id="brandHome" aria-label="Wellness Compass home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+      </span>
+      <span class="brand-text">Wellness&nbsp;Compass</span>
+    </a>
+    <nav class="header-actions">
+      <button class="ghost-btn" id="restartBtn" type="button" hidden>Start over</button>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ====================== LANDING ====================== -->
+    <section class="screen landing active" id="landing" aria-labelledby="landingTitle">
+      <div class="landing-inner">
+        <p class="eyebrow">Your personal lifestyle guide</p>
+        <h1 id="landingTitle">Find your direction to a <span class="accent">healthier you</span>.</h1>
+        <p class="lede">
+          Share a few details about how you live and move through your days. Wellness Compass turns
+          them into a clear snapshot, a personal score, and a 7-day plan you can actually follow.
+        </p>
+        <div class="landing-cta">
+          <button class="primary-btn" id="startBtn" type="button">Start my check-in</button>
+          <span class="cta-note">Takes about 2 minutes · Stays private on your device, never uploaded</span>
+        </div>
+
+        <ul class="feature-grid" aria-label="What you'll get">
+          <li class="feature-card">
+            <span class="feature-ico" aria-hidden="true">📊</span>
+            <h3>Wellness snapshot</h3>
+            <p>A score and a clear read on where you stand today.</p>
+          </li>
+          <li class="feature-card">
+            <span class="feature-ico" aria-hidden="true">🌱</span>
+            <h3>Strengths &amp; priorities</h3>
+            <p>What's already working and what deserves attention.</p>
+          </li>
+          <li class="feature-card">
+            <span class="feature-ico" aria-hidden="true">🗓️</span>
+            <h3>7-day plan</h3>
+            <p>Small, specific steps mapped across your week.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================== FORM ====================== -->
+    <section class="screen form-screen" id="formScreen" aria-labelledby="formTitle" hidden>
+      <div class="form-shell">
+        <div class="progress-head">
+          <h2 id="formTitle" class="step-title">Let's get to know your lifestyle</h2>
+          <div class="progress-meta">
+            <span id="stepLabel">Step 1 of 5</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <form id="wellnessForm" novalidate>
+          <!-- STEP 1: BODY -->
+          <fieldset class="form-step active" data-step="0">
+            <legend>About your body</legend>
+            <p class="step-hint">Used only to estimate BMI as one small part of your snapshot.</p>
+            <div class="field-row">
+              <div class="field">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" min="120" max="230" inputmode="numeric" placeholder="170" required />
+                <span class="field-error" data-for="height"></span>
+              </div>
+              <div class="field">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" min="35" max="250" inputmode="numeric" placeholder="68" required />
+                <span class="field-error" data-for="weight"></span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="18" max="100" inputmode="numeric" placeholder="30" required />
+              <span class="field-error" data-for="age"></span>
+            </div>
+          </fieldset>
+
+          <!-- STEP 2: SLEEP & ACTIVITY -->
+          <fieldset class="form-step" data-step="1">
+            <legend>Sleep &amp; movement</legend>
+            <div class="field">
+              <label for="sleep">Average sleep per night: <output id="sleepOut">7</output> hours</label>
+              <input type="range" id="sleep" name="sleep" min="3" max="11" step="0.5" value="7" />
+              <div class="range-scale"><span>3h</span><span>7h</span><span>11h</span></div>
+            </div>
+            <div class="field">
+              <label for="activity">Physical activity per week</label>
+              <select id="activity" name="activity" required>
+                <option value="" disabled selected>Choose one</option>
+                <option value="0">Rarely / none</option>
+                <option value="1">1–2 light sessions</option>
+                <option value="2">3–4 moderate sessions</option>
+                <option value="3">5+ sessions / very active</option>
+              </select>
+              <span class="field-error" data-for="activity"></span>
+            </div>
+            <div class="field">
+              <label for="screen">Daily recreational screen time: <output id="screenOut">4</output> hours</label>
+              <input type="range" id="screen" name="screen" min="0" max="14" step="0.5" value="4" />
+              <div class="range-scale"><span>0h</span><span>7h</span><span>14h</span></div>
+            </div>
+          </fieldset>
+
+          <!-- STEP 3: NUTRITION -->
+          <fieldset class="form-step" data-step="2">
+            <legend>Hydration &amp; nutrition</legend>
+            <div class="field">
+              <label for="water">Glasses of water per day: <output id="waterOut">6</output></label>
+              <input type="range" id="water" name="water" min="0" max="14" step="1" value="6" />
+              <div class="range-scale"><span>0</span><span>7</span><span>14</span></div>
+            </div>
+            <div class="field">
+              <label for="produce">Servings of fruit &amp; vegetables per day</label>
+              <select id="produce" name="produce" required>
+                <option value="" disabled selected>Choose one</option>
+                <option value="0">0–1 servings</option>
+                <option value="1">2–3 servings</option>
+                <option value="2">4–5 servings</option>
+                <option value="3">5+ servings</option>
+              </select>
+              <span class="field-error" data-for="produce"></span>
+            </div>
+          </fieldset>
+
+          <!-- STEP 4: STRESS -->
+          <fieldset class="form-step" data-step="3">
+            <legend>How you're feeling</legend>
+            <div class="field">
+              <label for="stress">Typical stress level: <output id="stressOut">Moderate</output></label>
+              <input type="range" id="stress" name="stress" min="1" max="5" step="1" value="3" />
+              <div class="range-scale"><span>Calm</span><span>Moderate</span><span>High</span></div>
+            </div>
+            <div class="field">
+              <label for="mood">Overall energy most days</label>
+              <select id="mood" name="mood" required>
+                <option value="" disabled selected>Choose one</option>
+                <option value="3">Energized and steady</option>
+                <option value="2">Okay, some ups and downs</option>
+                <option value="1">Often tired or drained</option>
+              </select>
+              <span class="field-error" data-for="mood"></span>
+            </div>
+          </fieldset>
+
+          <!-- STEP 5: GOALS -->
+          <fieldset class="form-step" data-step="4">
+            <legend>Your focus</legend>
+            <div class="field">
+              <label for="goal">Primary wellness goal</label>
+              <select id="goal" name="goal" required>
+                <option value="" disabled selected>Choose one</option>
+                <option value="energy">Boost daily energy</option>
+                <option value="sleep">Sleep better</option>
+                <option value="fitness">Move more / get fit</option>
+                <option value="stress">Lower stress &amp; feel calmer</option>
+                <option value="weight">Reach a healthier weight</option>
+                <option value="nutrition">Eat better</option>
+                <option value="balance">Find better balance</option>
+              </select>
+              <span class="field-error" data-for="goal"></span>
+            </div>
+            <div class="field">
+              <label for="challenge">Biggest challenge right now</label>
+              <textarea id="challenge" name="challenge" rows="3" maxlength="240"
+                placeholder="e.g. I sit at a desk all day and struggle to wind down at night."></textarea>
+              <span class="char-count"><span id="charCount">0</span>/240</span>
+            </div>
+          </fieldset>
+
+          <div class="form-nav">
+            <button class="ghost-btn" id="backBtn" type="button" hidden>Back</button>
+            <button class="primary-btn" id="nextBtn" type="button">Continue</button>
+            <button class="primary-btn" id="submitBtn" type="submit" hidden>Generate my snapshot</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================== RESULTS ====================== -->
+    <section class="screen results-screen" id="resultsScreen" aria-labelledby="resultsTitle" hidden>
+      <div class="results-inner">
+        <div class="results-head">
+          <p class="eyebrow">Your personal snapshot</p>
+          <h2 id="resultsTitle">Here's your Wellness Compass reading</h2>
+        </div>
+
+        <!-- Score + snapshot -->
+        <div class="snapshot-card">
+          <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 120 120" role="img" aria-labelledby="gaugeLabel">
+              <title id="gaugeLabel">Overall wellness score</title>
+              <circle class="gauge-bg" cx="60" cy="60" r="52"></circle>
+              <circle class="gauge-fg" cx="60" cy="60" r="52" id="gaugeArc"></circle>
+            </svg>
+            <div class="gauge-center">
+              <span class="gauge-score" id="scoreValue">0</span>
+              <span class="gauge-max">/100</span>
+            </div>
+          </div>
+          <div class="snapshot-text">
+            <h3 id="snapshotTier">—</h3>
+            <p id="snapshotSummary"></p>
+            <p class="snapshot-goal" id="snapshotGoal"></p>
+          </div>
+        </div>
+
+        <!-- Challenge echo -->
+        <div class="panel panel-challenge" id="challengeEcho" hidden></div>
+
+        <!-- Dimension bars -->
+        <div class="panel">
+          <h3 class="panel-title">How each area is doing</h3>
+          <ul class="dimension-list" id="dimensionList"></ul>
+        </div>
+
+        <!-- Strengths & priorities -->
+        <div class="two-col">
+          <div class="panel panel-strength">
+            <h3 class="panel-title">💪 Your strengths</h3>
+            <ul class="pill-list" id="strengthsList"></ul>
+          </div>
+          <div class="panel panel-priority">
+            <h3 class="panel-title">🎯 Priority areas</h3>
+            <ul class="pill-list" id="prioritiesList"></ul>
+          </div>
+        </div>
+
+        <!-- 7-day plan -->
+        <div class="panel">
+          <h3 class="panel-title">🗓️ Your 7-day wellness plan</h3>
+          <ol class="plan-timeline" id="planList"></ol>
+        </div>
+
+        <!-- Daily routine -->
+        <div class="panel">
+          <h3 class="panel-title">🌤️ Suggested daily routine</h3>
+          <div class="routine-grid" id="routineList"></div>
+        </div>
+
+
+        <div class="results-footer">
+          <button class="primary-btn" id="againBtn" type="button">Retake check-in</button>
+          <button class="ghost-btn" id="printBtn" type="button">Print / save as PDF</button>
+        </div>
+        <p class="disclaimer">
+          Wellness Compass offers general lifestyle suggestions and is not medical advice.
+          For personal health concerns, please consult a qualified professional.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Wellness Compass · a friendly nudge toward better habits</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
